@@ -30,13 +30,8 @@ public class LoginActivity extends BaseAuthActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.sign_in_button:
-                signIn();
-                break;
-            default:
-                break;
-
+        if (view.getId() == R.id.sign_in_button) {
+            signIn();
         }
 
     }

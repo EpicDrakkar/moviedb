@@ -26,6 +26,7 @@ public class DetailFragment extends Fragment {
     private TextView txtTitle;
     private TextView txtOverview;
     private TextView txtReleaseDate;
+    Movie movie;
 
     public static DetailFragment newInstance(int movieId) {
         DetailFragment myFragment = new DetailFragment();
@@ -42,12 +43,11 @@ public class DetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.detail_fragment, container, false);
         setRetainInstance(true);
-
         if (savedInstanceState == null) {
             movieId = getArguments().getInt(Constants.MOVIE_ID);
         }
+        runQuery();
         initLayout(view);
-
         return view;
     }
 
@@ -58,12 +58,14 @@ public class DetailFragment extends Fragment {
         txtOverview = (TextView) view.findViewById(R.id.overview_detail_fragment);
         txtReleaseDate = (TextView) view.findViewById(R.id.release_date_detail_fragment);
 
-        SQLiteHelper sqLiteHelper = new SQLiteHelper(getActivity());
-        Movie movie = sqLiteHelper.getHistory(movieId);
-
         Picasso.with(getActivity()).load(ApiUtils.IMAGES_BASE_URL + movie.getPoster_path()).into(imgCover);
         txtTitle.setText(movie.getTitle());
         txtOverview.setText(movie.getOverview());
         txtReleaseDate.setText(movie.getRelease_date());
+    }
+
+    private void runQuery() {
+        SQLiteHelper sqLiteHelper = new SQLiteHelper(getActivity());
+        movie = sqLiteHelper.getHistory(movieId);
     }
 }

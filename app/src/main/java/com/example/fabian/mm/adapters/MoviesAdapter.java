@@ -40,14 +40,15 @@ public class MoviesAdapter extends RecyclerView.Adapter<MovieViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(MovieViewHolder holder, final int position) {
+    public void onBindViewHolder(final MovieViewHolder holder, int position) {
+
         Picasso.with(context).load(ApiUtils.IMAGES_BASE_URL + movies.get(position).getPoster_path()).into(holder.imgCover);
         holder.txtOverview.setText(movies.get(position).getOverview());
         holder.txtTitle.setText(movies.get(position).getTitle());
-        holder.imgCover.setOnClickListener(new View.OnClickListener() {
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                listener.onItemClick(position);
+                listener.onItemClick(holder.getAdapterPosition());
             }
         });
     }

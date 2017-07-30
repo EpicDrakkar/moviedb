@@ -93,9 +93,12 @@ public class SearchFragment extends BaseFragment {
         mService.getMovies(query).enqueue(new Callback<MovieResponse>() {
             @Override
             public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
-                if (response.isSuccessful()) {
-                    moviesAdapter.setMovies(response.body().getResults());
-                    moviesAdapter.notifyDataSetChanged();
+                if (response.isSuccessful() &&
+                    response.body().getResults() != null) {
+                    if (moviesAdapter != null) {
+                        moviesAdapter.setMovies(response.body().getResults());
+                        moviesAdapter.notifyDataSetChanged();
+                    }
                 }
             }
 

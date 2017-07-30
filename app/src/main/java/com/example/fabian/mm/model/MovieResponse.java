@@ -12,7 +12,7 @@ public class MovieResponse
 
     private String page;
 
-    private String total_pages;
+    private int total_pages;
 
     private String total_results;
 
@@ -36,12 +36,12 @@ public class MovieResponse
         this.page = page;
     }
 
-    public String getTotal_pages ()
+    public int getTotal_pages ()
     {
         return total_pages;
     }
 
-    public void setTotal_pages (String total_pages)
+    public void setTotal_pages (int total_pages)
     {
         this.total_pages = total_pages;
     }

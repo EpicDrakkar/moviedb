@@ -58,22 +58,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-
-    public void updateHistory(Movie movie) {
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        ContentValues values = new ContentValues();
-
-        values.put(MOVIE_ID, movie.getId());
-        values.put(DATA, serializeToJson(movie));
-
-        db.update(TABLE_HISTORY, //table
-                values, // column/value
-                MOVIE_ID + " = ?", // selections
-                new String[]{String.valueOf(movie.getId())});
-        db.close();
-    }
-
     public Movie getHistory(int movieId) {
         Movie movie = null;
         SQLiteDatabase db = this.getReadableDatabase();
@@ -112,7 +96,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
             }
             cursor.close();
         }
-        db.close(); //Should CLOSE ON READ??
+        db.close();
         return movies;
     }
 

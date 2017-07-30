@@ -46,14 +46,15 @@ public class HistoryFragment extends BaseFragment {
     public void setupAdapter() {
         if (moviesAdapter == null) {
             moviesAdapter = new MoviesAdapter(getActivity(), new ArrayList<Movie>(0));
+            moviesAdapter.setListener(new OnMovieClickListener() {
+                @Override
+                public void onItemClick(int position) {
+                    Movie movie = moviesAdapter.getMovie(position);
+                    Toast.makeText(getActivity(), movie.getTitle(), Toast.LENGTH_LONG).show();
+                    context.changeFragment(DetailFragment.newInstance(movie.getId()));
+                }
+            });
         }
-        moviesAdapter.setListener(new OnMovieClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                Movie movie = moviesAdapter.getMovie(position);
-                Toast.makeText(getActivity(), movie.getTitle(), Toast.LENGTH_LONG).show();
-                context.changeFragment(DetailFragment.newInstance(movie.getId()));
-            }
-        });
+
     }
 }
