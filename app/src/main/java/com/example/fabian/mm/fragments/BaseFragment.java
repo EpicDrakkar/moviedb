@@ -1,6 +1,7 @@
 package com.example.fabian.mm.fragments;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -23,7 +24,13 @@ public abstract class BaseFragment extends Fragment {
     public ActionsListener context;
 
 
-    public void initializeApp() {
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        initializeApiService();
+    }
+
+    public void initializeApiService() {
         mService = ApiUtils.getSOService();
     }
 

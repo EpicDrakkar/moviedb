@@ -21,13 +21,15 @@ import java.util.ArrayList;
 
 public class HistoryFragment extends BaseFragment {
 
+    public static HistoryFragment newInstance() {
+        return new HistoryFragment();
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.history_fragment, container, false);
         movieListRecycler = (RecyclerView) view.findViewById(R.id.recycler_view_history);
-        initializeApp();
         setupAdapter();
         setupRecycler();
         getMoviesResult();
@@ -42,7 +44,9 @@ public class HistoryFragment extends BaseFragment {
 
     @Override
     public void setupAdapter() {
-        moviesAdapter = new MoviesAdapter(getActivity(), new ArrayList<Movie>(0));
+        if (moviesAdapter == null) {
+            moviesAdapter = new MoviesAdapter(getActivity(), new ArrayList<Movie>(0));
+        }
         moviesAdapter.setListener(new OnMovieClickListener() {
             @Override
             public void onItemClick(int position) {

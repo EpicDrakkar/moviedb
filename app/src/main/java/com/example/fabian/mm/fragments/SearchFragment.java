@@ -29,23 +29,28 @@ import retrofit2.Response;
 
 public class SearchFragment extends BaseFragment {
 
-    private EditText edtSearchInput;
+
+    public static SearchFragment newInstance() {
+        return new SearchFragment();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.search_fragment, container, false);
         initializateViews(view);
-        initializeApp();
-        setupAdapter();
-        setupRecycler();
+        setRetainInstance(true);
+        if (savedInstanceState == null) {
+            setupAdapter();
+            setupRecycler();
+        }
+
         return view;
     }
 
     private void initializateViews(View view) {
         movieListRecycler = (RecyclerView) view.findViewById(R.id.recycler_view_search);
-        edtSearchInput = (EditText) view.findViewById(R.id.search_input_search_fragment);
+        EditText edtSearchInput = (EditText) view.findViewById(R.id.search_input_search_fragment);
 
         edtSearchInput.addTextChangedListener(new TextWatcher() {
             @Override
@@ -69,17 +74,19 @@ public class SearchFragment extends BaseFragment {
 
     @Override
     public void setupAdapter() {
-        moviesAdapter = new MoviesAdapter(getActivity(), new ArrayList<Movie>(0));
-        moviesAdapter.setListener(new OnMovieClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                Movie movie = moviesAdapter.getMovie(position);
-                Toast.makeText(getActivity(), movie.getTitle(), Toast.LENGTH_LONG).show();
-                SQLiteHelper sqLiteHelper = new SQLiteHelper(getActivity());
-                sqLiteHelper.addHistory(movie);
-                context.changeFragment(DetailFragment.newInstance(movie.getId()));
-            }
-        });
+        if (moviesAdapter == null) {
+            moviesAdapter = new MoviesAdapter(getActivity(), new ArrayList<Movie>(0));
+            moviesAdapter.setListener(new OnMovieClickListener() {
+                @Override
+                public void onItemClick(int position) {
+                    Movie movie = moviesAdapter.getMovie(position);
+                    Toast.makeText(getActivity(), movie.getTitle(), Toast.LENGTH_LONG).show();
+                    SQLiteHelper sqLiteHelper = new SQLiteHelper(getActivity());
+                    sqLiteHelper.addHistory(movie);
+                    context.changeFragment(DetailFragment.newInstance(movie.getId()));
+                }
+            });
+        }
     }
 
     public void getMoviesResult(String query) {

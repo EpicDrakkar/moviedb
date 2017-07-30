@@ -9,13 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <FrameLayout
-            android:id="@+id/fragment_placeholder"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
-
         <LinearLayout
+            android:id="@+id/footer_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -26,14 +21,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:text="Search" />
+                android:text="@string/search" />
 
             <Button
                 android:id="@+id/history_button_fragment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:text="History" />
+                android:text="@string/history" />
         </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/fragment_placeholder"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/footer_toolbar" />
     </RelativeLayout>
 </android.support.constraint.ConstraintLayout>

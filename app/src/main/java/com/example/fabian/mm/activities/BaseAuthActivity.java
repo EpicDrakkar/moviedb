@@ -41,6 +41,7 @@ public class BaseAuthActivity extends AppCompatActivity implements
         startActivity(intent);
     }
 
+
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 

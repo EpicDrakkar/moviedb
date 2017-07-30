@@ -27,7 +27,6 @@ public class DetailFragment extends Fragment {
     private TextView txtOverview;
     private TextView txtReleaseDate;
 
-
     public static DetailFragment newInstance(int movieId) {
         DetailFragment myFragment = new DetailFragment();
 
@@ -41,8 +40,8 @@ public class DetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.detail_fragment, container, false);
+        setRetainInstance(true);
 
         if (savedInstanceState == null) {
             movieId = getArguments().getInt(Constants.MOVIE_ID);
@@ -51,6 +50,7 @@ public class DetailFragment extends Fragment {
 
         return view;
     }
+
 
     private void initLayout(View view) {
         imgCover = (ImageView) view.findViewById(R.id.cover_detail_fragment);
@@ -65,13 +65,5 @@ public class DetailFragment extends Fragment {
         txtTitle.setText(movie.getTitle());
         txtOverview.setText(movie.getOverview());
         txtReleaseDate.setText(movie.getRelease_date());
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        final Bundle movieState = new Bundle(outState);
-        movieState.putInt(Constants.MOVIE_ID, movieId);
-        outState.putBundle("movie_state_id", movieState);
-        super.onSaveInstanceState(outState);
     }
 }

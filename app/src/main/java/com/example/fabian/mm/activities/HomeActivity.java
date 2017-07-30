@@ -27,9 +27,9 @@ public class HomeActivity extends AppCompatActivity implements ActionsListener, 
         Stetho.initializeWithDefaults(this);
         initializeViews();
 
-        searchFragment = new SearchFragment();
+        searchFragment = SearchFragment.newInstance();
         changeFragment(searchFragment);
-        historyFragment = new HistoryFragment();
+        historyFragment = HistoryFragment.newInstance();
     }
 
     private void initializeViews() {
