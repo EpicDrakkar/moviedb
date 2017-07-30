@@ -109,7 +109,6 @@ public class SearchFragment extends BaseFragment {
 
             @Override
             public void onFailure(Call<MovieResponse> call, Throwable t) {
-                showErrorMessage();
                 hasResults(false);
             }
         });
