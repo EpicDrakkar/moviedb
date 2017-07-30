@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "44136814833",
+    "firebase_url": "https://moviedb-563d3.firebaseio.com",
+    "project_id": "moviedb-563d3",
+    "storage_bucket": "moviedb-563d3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:44136814833:android:c63d5fc9961f2f68",
+        "android_client_info": {
+          "package_name": "com.example.fabian.mm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "44136814833-5gb50pj9n6gmn3occ2bfsi2ip1thlisn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGzaDBGN1KqLRJTPc6LpTc_9s042XY3Uk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

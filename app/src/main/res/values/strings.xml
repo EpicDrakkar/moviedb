@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">MM</string>
+    <string name="auth_failed">Error login in</string>
+</resources>
