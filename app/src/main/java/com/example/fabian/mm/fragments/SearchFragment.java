@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.fabian.mm.R;
@@ -18,6 +19,7 @@ import com.example.fabian.mm.model.Movie;
 import com.example.fabian.mm.model.MovieResponse;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -29,6 +31,7 @@ import retrofit2.Response;
 
 public class SearchFragment extends BaseFragment {
 
+    private TextView txtNoResultsFound;
 
     public static SearchFragment newInstance() {
         return new SearchFragment();
@@ -51,6 +54,7 @@ public class SearchFragment extends BaseFragment {
     private void initializateViews(View view) {
         movieListRecycler = (RecyclerView) view.findViewById(R.id.recycler_view_search);
         EditText edtSearchInput = (EditText) view.findViewById(R.id.search_input_search_fragment);
+        txtNoResultsFound = (TextView) view.findViewById(R.id.no_results_search_fragment);
 
         edtSearchInput.addTextChangedListener(new TextWatcher() {
             @Override
@@ -93,11 +97,12 @@ public class SearchFragment extends BaseFragment {
         mService.getMovies(query).enqueue(new Callback<MovieResponse>() {
             @Override
             public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
-                if (response.isSuccessful() &&
-                    response.body().getResults() != null) {
-                    if (moviesAdapter != null) {
-                        moviesAdapter.setMovies(response.body().getResults());
+                if (response.isSuccessful() && response.body() != null) {
+                    List<Movie> results = response.body().getResults();
+                    if (results != null && moviesAdapter != null) {
+                        moviesAdapter.setMovies(results);
                         moviesAdapter.notifyDataSetChanged();
+                        hasResults(results.size() > 0);
                     }
                 }
             }
@@ -105,7 +110,15 @@ public class SearchFragment extends BaseFragment {
             @Override
             public void onFailure(Call<MovieResponse> call, Throwable t) {
                 showErrorMessage();
+                hasResults(false);
             }
         });
+    }
+
+    private void hasResults(boolean toggle) {
+        if (txtNoResultsFound != null && movieListRecycler != null) {
+            movieListRecycler.setVisibility(toggle ? View.VISIBLE : View.GONE);
+            txtNoResultsFound.setVisibility(toggle ? View.GONE : View.VISIBLE);
+        }
     }
 }

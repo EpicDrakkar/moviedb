@@ -8,10 +8,17 @@
         android:id="@+id/search_input_search_fragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Please enter search term" />
+        android:hint="@string/please_enter_search_term" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view_search"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"/>
+
+    <TextView
+        android:id="@+id/no_results_search_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="@string/no_results" />
 </LinearLayout>

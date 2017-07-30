@@ -3,4 +3,6 @@
     <string name="auth_failed">Error login in</string>
     <string name="search">Search</string>
     <string name="history">History</string>
+    <string name="no_results">There are no results.</string>
+    <string name="please_enter_search_term">Please enter search term</string>
 </resources>
